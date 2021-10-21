@@ -24,7 +24,10 @@ public class Canva extends JPanel {
     private ArrayList<Point> calculatedPoints = new ArrayList<>();
     private int index = -1;
     private Point endPoint;
-
+    Canva() {
+        this.setLayout(null);
+        setButtons();
+    }
     {
         addMouseListener(new MouseAdapter() {
 
@@ -80,22 +83,9 @@ public class Canva extends JPanel {
 
     }
 
-    private void drawBezier() {
-        if (counter == pointsSlider.getValue()) {
-            isAllowedToDraw = false;
-            counter = 0;
-            index=0;
-            calculatedPoints = bezierCurveService.drawCurve(points);
-            Color color = Color.lightGray;
-            addButton.setText("Modify");
-            Canva.this.setBackground(color);
-        }
-    }
 
-    Canva() {
-        this.setLayout(null);
-        setButtons();
-    }
+
+
 
     @Override
     public void paintComponent(Graphics g) {
@@ -127,7 +117,7 @@ public class Canva extends JPanel {
         xPoint.setBounds(550, 730, 50, 25);
         yPoint.setBounds(620, 730, 50, 25);
         addButton.setBounds(690, 730, 100, 25);
-        addButton.addActionListener(e->modifyOrAdd());
+        addButton.addActionListener(e -> modifyOrAdd());
         startButton.addActionListener(e -> {
             this.isAllowedToDraw = true;
             Color color = Color.gray;
@@ -155,14 +145,12 @@ public class Canva extends JPanel {
         Point point = new Point(
                 Integer.parseInt(xPoint.getText()),
                 Integer.parseInt(yPoint.getText()));
-        if(isAllowedToDraw)
-        {
+        if (isAllowedToDraw) {
             points.add(point);
             counter++;
             drawBezier();
-        }
-        else {
-            points.set(index,point);
+        } else {
+            points.set(index, point);
             calculatedPoints = bezierCurveService.drawCurve(points);
             repaint();
 
@@ -175,5 +163,16 @@ public class Canva extends JPanel {
         index = 0;
         points.clear();
         calculatedPoints.clear();
+    }
+    private void drawBezier() {
+        if (counter == pointsSlider.getValue()) {
+            isAllowedToDraw = false;
+            counter = 0;
+            index = 0;
+            calculatedPoints = bezierCurveService.drawCurve(points);
+            Color color = Color.lightGray;
+            addButton.setText("Modify");
+            Canva.this.setBackground(color);
+        }
     }
 }
