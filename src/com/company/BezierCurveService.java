@@ -15,7 +15,7 @@ public class BezierCurveService {
     }
 
     private void calculatePoints(ArrayList<Point> points, float t, int[] pascals, ArrayList<Point> calculatedPoints) {
-        for(int i =0 ;i<200;i++)
+        for(int i =0 ;i<201;i++)
         {
             float x=0;
             float y=0;

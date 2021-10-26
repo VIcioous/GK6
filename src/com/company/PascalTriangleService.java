@@ -10,7 +10,6 @@ public class PascalTriangleService {
         Arrays.fill(table,1);
 
         for(int i=1; i<n;i++)
-
         {
             int C=1;
             for(int j=1;j<=i;j++)

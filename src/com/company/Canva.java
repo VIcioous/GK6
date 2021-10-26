@@ -70,7 +70,7 @@ public class Canva extends JPanel {
                     yPoint.setText(String.valueOf(endPoint.getY()));
                     points.set(index, endPoint);
                     calculatedPoints = bezierCurveService.drawCurve(points);
-                    Color color = Color.gray;
+
                     repaint();
                 }
             }
@@ -100,14 +100,15 @@ public class Canva extends JPanel {
                         (int) calculatedPoints.get(i + 1).getY());
 
             }
-            for (Point point : points) {
-                graphics2D.drawOval(
-                        (int) point.getX() - 5,
-                        (int) point.getY() - 5,
-                        10,
-                        10
-                );
-            }
+
+        }
+        for (Point point : points) {
+            graphics2D.drawOval(
+                    (int) point.getX() - 5,
+                    (int) point.getY() - 5,
+                    10,
+                    10
+            );
         }
         repaint();
     }
@@ -118,11 +119,7 @@ public class Canva extends JPanel {
         yPoint.setBounds(620, 730, 50, 25);
         addButton.setBounds(690, 730, 100, 25);
         addButton.addActionListener(e -> modifyOrAdd());
-        startButton.addActionListener(e -> {
-            this.isAllowedToDraw = true;
-            Color color = Color.gray;
-            this.setBackground(color);
-        });
+        startButton.addActionListener(e -> this.isAllowedToDraw = true);
         resetButton.setBounds(160, 730, 100, 25);
         resetButton.addActionListener(e -> resetCanvas());
         controlPoints.setBounds(500, 730, 30, 25);
@@ -170,9 +167,8 @@ public class Canva extends JPanel {
             counter = 0;
             index = 0;
             calculatedPoints = bezierCurveService.drawCurve(points);
-            Color color = Color.lightGray;
             addButton.setText("Modify");
-            Canva.this.setBackground(color);
+
         }
     }
 }
